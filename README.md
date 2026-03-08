@@ -103,7 +103,7 @@ python tools/convert_models/convert_dinov3_depthmoe.py checkpoints/DINOv3/lvd168
 ```
 * Then, perform inference using the trained model.
 ```
-python tools/test.py configs/dinov2/fmolte_dinov2_mask2former_384x384_bs1x8_gid.py checkpoints/cross_sensor_iter_78760.pth --backbone checkpoints/dinov2_converted.pth
+python tools/test.py configs/dinov3/depthmoe_dinov3_mask2former_512x512_bs1x8_gid_k1_Ne6_r16.py work_dirs/cross_sensor_iter_78760.pth --backbone checkpoints/dinov3_converted_depthmoe.pth
 ```
 * Finally, visualize the **land cover classification results**.
 ```
