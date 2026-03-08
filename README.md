@@ -17,4 +17,4 @@ Our experiments establish **cross-sensor** and **cross-geospatial** generalizati
 
 |Setting |mIoU |Config|Checkpoint|
 |-|-|-|-|
-|**Cross-sensor task**|**64.36**|[config](https://github.com/daxichen/Land-MoE/blob/main/configs/dinov2/fmolte_dinov2_mask2former_384x384_bs1x8_gid.py)|[checkpoint](https://drive.google.com/file/d/1Twg3ReH3tZe4LMi4ZeaOi-gvYTsGDx8P/view?usp=drive_link)
+|**Cross-sensor task**|**66.19**|[config](https://github.com/daxichen/Land-MoE/blob/main/configs/dinov2/fmolte_dinov2_mask2former_384x384_bs1x8_gid.py)|[checkpoint](https://drive.google.com/file/d/1Twg3ReH3tZe4LMi4ZeaOi-gvYTsGDx8P/view?usp=drive_link)
