@@ -97,7 +97,7 @@ data
   **Note: You need to specify your input data paths and the paths for processing output data.**
 
 # Ecaluation
-* First, download [DINOv2](https://dl.fbaipublicfiles.com/dinov2/dinov2_vitl14/dinov2_vitl14_pretrain.pth) pre-trained weights and process the **Dinov2 Large pre-trained model weights** to adapt them for **four-channel multispectral images**.
+* First, download [DINOv3](https://github.com/facebookresearch/dinov3) and [PromptDA](https://huggingface.co/depth-anything/prompt-depth-anything-vitl/tree/main) pre-trained weights and process the **Dinov3 Large and PromptDA Large pre-trained model weights**.
 ```
 python tools/convert_models/convert_dinov2.py checkpoints/dinov2_vitl14_pretrain.pth checkpoints/dinov2_converted.pth
 ```
