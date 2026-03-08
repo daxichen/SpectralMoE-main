@@ -17,4 +17,4 @@ Our experiments establish **cross-sensor** and **cross-geospatial** generalizati
 
 |Setting |mIoU |Config|Checkpoint|
 |-|-|-|-|
-|**Cross-sensor task**|**66.19**|[config](https://github.com/daxichen/SpectralMoE-main/blob/main/configs/dinov3/depthmoe_dinov3_mask2former_512x512_bs2x4_gid_k1_Ne6_r16.py)|[checkpoint](https://drive.google.com/file/d/1Twg3ReH3tZe4LMi4ZeaOi-gvYTsGDx8P/view?usp=drive_link)
+|**Cross-sensor task**|**66.19**|[config](https://github.com/daxichen/SpectralMoE-main/blob/main/configs/dinov3/depthmoe_dinov3_mask2former_512x512_bs2x4_gid_k1_Ne6_r16.py)|[checkpoint](https://drive.google.com/file/d/1UrMGcWRQihnPsaZ3Y0fkG_BkbhpK093m/view?usp=sharing)
