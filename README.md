@@ -123,3 +123,6 @@ PORT=12345 CUDA_VISIBLE_DEVICES=0,1 bash tools/dist_train.sh configs/dinov3/dept
 
 # Acknowledgment
 Our implementation is mainly based on following repositories. Thanks for their authors.
+* [MMSegmentation](https://github.com/open-mmlab/mmsegmentation)
+* [Rein](https://github.com/w1oves/Rein)
+* [DepthForge](https://github.com/johnwaynecornell/DepthForge)
