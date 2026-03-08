@@ -18,3 +18,108 @@ Our experiments establish **cross-sensor** and **cross-geospatial** generalizati
 |Setting |mIoU |Config|Checkpoint|
 |-|-|-|-|
 |**Cross-sensor task**|**66.19**|[config](https://github.com/daxichen/SpectralMoE-main/blob/main/configs/dinov3/depthmoe_dinov3_mask2former_512x512_bs2x4_gid_k1_Ne6_r16.py)|[checkpoint](https://drive.google.com/file/d/1UrMGcWRQihnPsaZ3Y0fkG_BkbhpK093m/view?usp=sharing)
+
+# Environment Setup
+```
+conda create -n SpectralMoE python=3.10
+conda activate SpectralMoE
+conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.8 -c pytorch -c nvidia
+pip install -U openmim
+mim install mmengine==0.10.7
+mim install mmcv==2.0.0
+mim install mmdet==3.3.0
+mim install mmsegmentation==1.2.2
+pip install xformers==0.0.20
+pip install pillow==11.1.0
+pip install numpy==1.26.3
+pip install timm==0.4.12
+pip install einops==0.8.0
+pip install ftfy==6.3.1
+pip install matplotlib==3.10.0
+pip install prettytable==3.12.0
+pip install GDAL==3.6.1
+pip install future tensorboard
+```
+
+
+# Data Processing
+The data folder structure should look like this:
+```
+data
+├── GID
+│   ├── source_dir
+│   │   ├── image
+│   │   ├── label
+│   ├── target_dir
+│   │   ├── image
+│   │   ├── label
+├── Potsdam2Vaihingen
+│   ├── Potsdam
+│   |   ├── image
+│   │   ├── label
+│   ├── Vaihingen
+│   |   ├── image
+│   |   ├── label
+├── ...
+```
+
+## Constructing Cross-Sensor Generalization Tasks
+* **Remove padding:** This script is designed to remove the "padding" from your GID (Five-Billion-Pixels dataset) images and their corresponding labels. GID images come with extra borders around the actual data, and this script helps you crop them out consistently.
+  ```
+  python tools\convert_datasets\remove_padding.py
+   ```
+  **Note: You need to specify your input data paths and the paths for processing output data.**
+  
+* **Crop GID images and labels:** Crop GF-2 **multispectral images** and **labels** to a size of **512x512**.
+  ```
+  python tools\convert_datasets\cut_GID.py
+  python tools\convert_datasets\cut_GID_label.py
+  ```
+  **Note: You need to specify your input data paths and the paths for processing output data.**
+
+* **Rename:** Unify the names of labels with their corresponding GF-2 multispectral images.
+  ```
+  python tools\convert_datasets\rename_gid_label.py
+  ```
+  **Note: You need to specify your input data paths.**
+  
+* **Target Domain Data Processing:** Extract **multispectral images** and **labels** from the annotated regions of [five megacities in China](https://drive.google.com/drive/folders/192UybJ9xDZcaxWnYQchUc5QhlVq51oL9) to serve as **target domain data**.
+  ```
+  python tools\convert_datasets\GID_target_process.py
+  ```
+  **Note: You need to specify your input data paths and the paths for processing output data.**
+
+  Then, crop the **target domain multispectral images** and their corresponding **labels** to a size of **512x512**.
+   ```
+  python tools\convert_datasets\cut_GID.py
+  python tools\convert_datasets\cut_GID_label.py
+  ```
+  **Note: You need to specify your input data paths and the paths for processing output data.**
+
+# Ecaluation
+* First, download [DINOv2](https://dl.fbaipublicfiles.com/dinov2/dinov2_vitl14/dinov2_vitl14_pretrain.pth) pre-trained weights and process the **Dinov2 Large pre-trained model weights** to adapt them for **four-channel multispectral images**.
+```
+python tools/convert_models/convert_dinov2.py checkpoints/dinov2_vitl14_pretrain.pth checkpoints/dinov2_converted.pth
+```
+* Then, perform inference using the trained model.
+```
+python tools/test.py configs/dinov2/fmolte_dinov2_mask2former_384x384_bs1x8_gid.py checkpoints/cross_sensor_iter_78760.pth --backbone checkpoints/dinov2_converted.pth
+```
+* Finally, visualize the **land cover classification results**.
+```
+python tools\visualizesegmentationmap.py
+```
+**Note: You need to specify your input data paths and the paths for processing output data.**
+
+# Training
+* First, download [DINOv2](https://dl.fbaipublicfiles.com/dinov2/dinov2_vitl14/dinov2_vitl14_pretrain.pth) pre-trained weights and process the **Dinov2 Large pre-trained model weights** to adapt them for **four-channel multispectral images**.
+```
+python tools/convert_models/convert_dinov2.py checkpoints/dinov2_vitl14_pretrain.pth checkpoints/dinov2_converted.pth
+```
+* Then, begin training.
+```
+python tools/train.py configs/dinov2/fmolte_dinov2_mask2former_384x384_bs1x8_gid.py 
+```
+
+# Acknowledgment
+Our implementation is mainly based on following repositories. Thanks for their authors.
