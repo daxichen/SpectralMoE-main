@@ -99,7 +99,7 @@ data
 # Ecaluation
 * First, download [DINOv3](https://github.com/facebookresearch/dinov3) and [PromptDA](https://huggingface.co/depth-anything/prompt-depth-anything-vitl/tree/main) pre-trained weights and process the **Dinov3 Large and PromptDA Large pre-trained model weights**.
 ```
-python tools/convert_models/convert_dinov2.py checkpoints/dinov2_vitl14_pretrain.pth checkpoints/dinov2_converted.pth
+python tools/convert_models/convert_dinov3_depthmoe.py checkpoints/DINOv3/lvd1689m/dinov3_vitl16_pretrain_lvd1689m-8aa4cbdd.pth checkpoints/promptda_vitl.ckpt checkpoints/dinov3_converted_depthmoe.pth
 ```
 * Then, perform inference using the trained model.
 ```
