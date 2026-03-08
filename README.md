@@ -103,7 +103,7 @@ python tools/convert_models/convert_dinov3_depthmoe.py checkpoints/DINOv3/lvd168
 ```
 * Then, perform inference using the trained model.
 ```
-python tools/test.py configs/dinov3/depthmoe_dinov3_mask2former_512x512_bs1x8_gid_k1_Ne6_r16.py work_dirs/cross_sensor_iter_78760.pth --backbone checkpoints/dinov3_converted_depthmoe.pth
+python tools/test.py configs/dinov3/depthmoe_dinov3_mask2former_512x512_bs1x8_gid_k1_Ne6_r16.py work_dirs/iter_70884.pth --backbone checkpoints/dinov3_converted_depthmoe.pth
 ```
 * Finally, visualize the **land cover classification results**.
 ```
@@ -112,13 +112,13 @@ python tools\visualizesegmentationmap.py
 **Note: You need to specify your input data paths and the paths for processing output data.**
 
 # Training
-* First, download [DINOv2](https://dl.fbaipublicfiles.com/dinov2/dinov2_vitl14/dinov2_vitl14_pretrain.pth) pre-trained weights and process the **Dinov2 Large pre-trained model weights** to adapt them for **four-channel multispectral images**.
+* First, download [DINOv3](https://github.com/facebookresearch/dinov3) and [PromptDA](https://huggingface.co/depth-anything/prompt-depth-anything-vitl/tree/main) pre-trained weights and process the **Dinov3 Large and PromptDA Large pre-trained model weights**.
 ```
-python tools/convert_models/convert_dinov2.py checkpoints/dinov2_vitl14_pretrain.pth checkpoints/dinov2_converted.pth
+python tools/convert_models/convert_dinov3_depthmoe.py checkpoints/DINOv3/lvd1689m/dinov3_vitl16_pretrain_lvd1689m-8aa4cbdd.pth checkpoints/promptda_vitl.ckpt checkpoints/dinov3_converted_depthmoe.pth
 ```
 * Then, begin training.
 ```
-python tools/train.py configs/dinov2/fmolte_dinov2_mask2former_384x384_bs1x8_gid.py 
+PORT=12345 CUDA_VISIBLE_DEVICES=0,1 bash tools/dist_train.sh configs/dinov3/depthmoe_dinov3_mask2former_512x512_bs1x8_gid_k1_Ne6_r16.py 2
 ```
 
 # Acknowledgment
