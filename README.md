@@ -17,6 +17,7 @@ Please cite us if our project is helpful to you!
       archivePrefix={arXiv},
       url={https://arxiv.org/abs/2603.13352}, 
 }
+```
 
 # Cross-Sensor and Cross-Geospatial Generalization Tasks
 Our experiments establish **cross-sensor** and **cross-geospatial** generalization tasks based on GF-2 MSIs from the [Five-Billion-Pixels dataset](https://x-ytong.github.io/project/Five-Billion-Pixels.html). For the cross-sensor task, these GF-2 MSIs serve as the source domain, while MSIs from [GF-1, PlanetScope, and Sentinel-2](https://drive.google.com/drive/folders/192UybJ9xDZcaxWnYQchUc5QhlVq51oL9) form the target domains. For the cross-geospatial task, we partition the GF-2 MSIs within the [Five-Billion-Pixels dataset](https://drive.google.com/drive/folders/1924VnO08Gqo3Nv7Y4KirgJ9kqqCup7f0) into geographically disjoint source domain and target domain.
