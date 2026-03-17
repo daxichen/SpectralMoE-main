@@ -1,4 +1,6 @@
-# Local Precise Refinement: A Dual-Gated Mixture-of-Experts for Enhancing Foundation Model Generalization against Spectral Shifts
+# Local Precise Refinement: A Dual-Gated Mixture-of-Experts for Enhancing Foundation Model Generalization against Spectral Shifts (CVPR2026)
+
+Paper web page:[Local Precise Refinement: A Dual-Gated Mixture-of-Experts for Enhancing Foundation Model Generalization against Spectral Shifts](https://arxiv.org/abs/2603.13352).
 
 ![SpectralMoE Framework](docs/Fig3.png)
 
